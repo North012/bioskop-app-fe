@@ -1,0 +1,112 @@
+.payment-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: "Inter", sans-serif;
+    color: #333;
+}
+
+/* Film Header */
+.film-header {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+}
+
+.film-image {
+    width: 240px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.film-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.film-title {
+    font-size: 42px;
+    margin: 0;
+    font-weight: 700;
+}
+
+.film-studio {
+    font-size: 20px;
+    margin: 6px 0;
+    color: #666;
+}
+
+.film-date {
+    font-size: 18px;
+    color: #444;
+}
+
+/* Card */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    margin-top: 20px;
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+/* Select */
+.select-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 2px solid #2563eb;
+    background: #eef4ff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Rows */
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 16px;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 14px 0;
+}
+
+.detail-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Button */
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    margin-top: 20px;
+    background: #2563eb;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-submit:hover {
+    background: #1e4ecf;
+}

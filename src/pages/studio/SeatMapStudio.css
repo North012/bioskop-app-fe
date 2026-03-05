@@ -1,0 +1,38 @@
+.seat-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.seat.empty-seat {
+    background-color: transparent !important;
+    color: transparent !important;
+    border: none !important;
+}
+
+
+.seat.unavailable-seat {
+    background-color: #9ca3af;
+    color: #000000; /* text hitam */
+}
+
+.seat.available-seat {
+    background-color: #ef4444;
+    color: #000000; /* text hitam */
+}
+
+.screen {
+    margin: 20px 0;
+    padding: 15px 0;
+    background-color: #fbbf24; /* kuning */
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    border-radius: 4px;
+}

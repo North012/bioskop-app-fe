@@ -1,0 +1,92 @@
+.seat-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    background-color: #6b7280; /* default abu */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+}
+
+.seat.empty-seat {
+    background-color: #9ca3af; /* abu muda */
+    color: #9ca3af; /* text sama dengan background */
+    cursor: pointer;
+}
+
+.seat.unavailable-seat {
+    background-color: #9ca3af; /* abu muda */
+    color: #000000; /* text hitam */
+    cursor: pointer;
+}
+
+.seat.selected {
+    background-color: #22c55e; /* hijau */
+    color: #ffffff; /* text putih */
+}
+
+.seat.available-seat {
+    background-color: #ef4444; /* merah */
+    color: #000000; /* text hitam */
+    cursor: pointer;
+}
+
+.screen {
+    margin: 20px 0;
+    width: 80%;
+    height: 20px;
+    background-color: #fbbf24; /* kuning */
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.seat-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-available {
+    background-color: #22c55e; /* hijau */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.btn-empty {
+    background-color: #fbbf24;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-unavailable {
+    background-color: #ef4444;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

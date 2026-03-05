@@ -1,0 +1,109 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import useOrder from "../../hooks/useOrder";
+
+function OrderList() {
+    const { id } = useParams();
+    const { showScheduleFilm, loading, error } = useOrder();
+    const [booking, setBooking] = useState(null);
+
+    // Function untuk ambil ID YouTube dari berbagai format URL
+    const getYoutubeId = (url) => {
+        if (!url) return null;
+
+        if (url.includes("youtu.be")) {
+            return url.split("youtu.be/")[1].split("?")[0];
+        }
+
+        if (url.includes("v=")) {
+            return url.split("v=")[1].split("&")[0];
+        }
+
+        return null;
+    };
+
+    useEffect(() => {
+        const getBooking = async () => {
+            try {
+                const data = await showScheduleFilm(id);
+                setBooking(data);
+                console.log("data dari backend nih", data);
+            } catch (err) {
+                console.error("Gagal mengambil data", err);
+            }
+        };
+
+        getBooking();
+    }, [id]);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p className="text-red-500">{error}</p>;
+    if (!booking) return <p>Tidak ada data schedule untuk film ini</p>;
+
+    const youtubeId = getYoutubeId(booking.trailer);
+
+    return (
+        <div className="w-full max-w-3xl mx-auto p-4 space-y-6">
+            <h1 className="text-2xl font-bold text-center mb-4">
+                Jadwal Tayang
+            </h1>
+
+            {/* Trailer Preview */}
+            {youtubeId && (
+                <div className="w-full flex justify-center mb-6">
+                    <iframe
+                        width="560"
+                        height="315"
+                        src={`https://www.youtube.com/embed/${youtubeId}`}
+                        title="Trailer Film"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="rounded-lg shadow-lg"
+                    ></iframe>
+                </div>
+            )}
+
+            {/* Schedules */}
+            {booking.schedules.map((schedule, index) => (
+                <div key={index} className="p-4 bg-white shadow rounded-lg space-y-4">
+
+                    {/* Tanggal */}
+                    <h2 className="text-xl font-semibold border-b pb-2">
+                        {new Date(schedule.date).toLocaleDateString("id-ID", {
+                            weekday: "long",
+                            day: "numeric",
+                            month: "long",
+                        })}
+                    </h2>
+
+                    {/* Theater */}
+                    {schedule.theaters.map((theater, tIndex) => (
+                        <div key={tIndex} className="space-y-2">
+                            <p className="font-medium text-gray-700">
+                                🎥 {theater.theater_name}
+                            </p>
+
+                            {/* Times */}
+                            <div className="flex flex-wrap gap-2">
+                                {theater.times.map((time) => (
+                                    <button
+                                        key={time.id}
+                                        className="px-3 py-1 border rounded hover:bg-gray-100 text-sm"
+                                    >
+                                        <Link to={`/order/detail/seat/${time.id}`}>
+                                            {time.time}
+                                        </Link>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+    );
+}
+
+export default OrderList;

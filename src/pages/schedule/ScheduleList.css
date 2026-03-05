@@ -1,0 +1,44 @@
+.schedule-container {
+    padding: 16px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.list-wrapper {
+    border-top: 1px solid #ccc;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+}
+
+.list-name {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.list-show {
+    color: inherit;      /* mengikuti warna normal, tidak biru */
+    text-decoration: none;
+}
+
+.list-show:hover {
+    text-decoration: underline;  /* opsional */
+}
+
+.list-name {
+    color: #000;   /* hitam */
+}
+
+
+.error {
+    color: red;
+}

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import useFilms from "../../hooks/useFilms";
+import UpdateFilm from "./UpdateFilm";
 
 function FilmList() {
-    const { films, loading, error, deleteFilm } = useFilms();
+    const { films, loading, error, deleteFilm, updateStatusFilm } = useFilms();
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p className="text-red-500">{error}</p>
@@ -17,6 +18,17 @@ function FilmList() {
             }
         }
     };
+
+    const handleUpdateStatus = async (id) => {
+        if (window.confirm("Ubah status film menjadi tidak tayang?")) {
+            try {
+                await updateStatusFilm(id);
+                alert("Berhasil update status film!");
+            } catch {
+                alert("Gagal update status film!");
+            }
+        }
+    }
 
     return (
         <div className="p-4">
@@ -57,6 +69,11 @@ function FilmList() {
                             <td className="border p-2">
                                 <button onClick={() => handleDelete(film.id)} className="bg-red-600 text-white px-3 py-1 rounded">
                                     Delete
+                                </button>
+                            </td>
+                            <td className="border p-2">
+                                <button onClick={() => handleUpdateStatus(film.id)} className="bg-red-600 text-white px-3 py-1 rounded">
+                                    Update Status
                                 </button>
                             </td>
                         </tr>

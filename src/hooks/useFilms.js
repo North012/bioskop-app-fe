@@ -89,6 +89,23 @@ function useFilms() {
         }
     };
 
+    const updateStatusFilm = async (id, formData) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const res = await api.post(`film/updateStatus/${id}`, formData);
+            await fetchFilms();
+            return res.data;
+        } catch (err) {
+            console.error("Update User Error:", err.response?.data || err.message);
+            setError(err.response?.data || err.message);
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const deleteFilm = async (id) => {
         setLoading(true);
         setError(null);
@@ -105,7 +122,7 @@ function useFilms() {
         }
     };
 
-    return { films, loading, error, fetchFilms, nowPlayingFilm, showFilm, createFilm, updateFilm, deleteFilm };
+    return { films, loading, error, fetchFilms, nowPlayingFilm, showFilm, createFilm, updateFilm, deleteFilm, updateStatusFilm };
 }
 
 export default useFilms;

@@ -35,9 +35,10 @@ function Login() {
             {error && <p style={{ color: "red" }}>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label> Email </label> <br />
+                    <label for="email">Email</label> <br />
                     <input 
                         type="email"
+                        name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -47,6 +48,7 @@ function Login() {
                     <label>Password</label> <br />
                     <input 
                         type="password"
+                        name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required

@@ -66,42 +66,52 @@ function OrderList() {
             )}
 
             {/* Schedules */}
-            {booking.schedules.map((schedule, index) => (
-                <div key={index} className="p-4 bg-white shadow rounded-lg space-y-4">
+            {booking?.schedules?.length === 0 ? (
+                <div className="text-center text-gray-500 mt-4">
+                    <p className="text-lg font-semibold">
+                        Jadwal film pada hari ini kosong 🎬
+                    </p>
+                </div>
+            ) : (
+                /* Schedules */
+                booking.schedules.map((schedule, index) => (
+                    <div
+                        key={index}
+                        className="p-4 bg-white shadow rounded-lg space-y-4"
+                    >
+                        {/* Tanggal */}
+                        <h2 className="text-xl font-semibold border-b pb-2">
+                            {new Date(schedule.date).toLocaleDateString("id-ID", {
+                                weekday: "long",
+                                day: "numeric",
+                                month: "long",
+                            })}
+                        </h2>
 
-                    {/* Tanggal */}
-                    <h2 className="text-xl font-semibold border-b pb-2">
-                        {new Date(schedule.date).toLocaleDateString("id-ID", {
-                            weekday: "long",
-                            day: "numeric",
-                            month: "long",
-                        })}
-                    </h2>
+                        {/* Theater */}
+                        {schedule.theaters.map((theater, tIndex) => (
+                            <div key={tIndex} className="space-y-2">
+                                <p className="font-medium text-gray-700">
+                                    🎥 {theater.theater_name}
+                                </p>
 
-                    {/* Theater */}
-                    {schedule.theaters.map((theater, tIndex) => (
-                        <div key={tIndex} className="space-y-2">
-                            <p className="font-medium text-gray-700">
-                                🎥 {theater.theater_name}
-                            </p>
-
-                            {/* Times */}
-                            <div className="flex flex-wrap gap-2">
-                                {theater.times.map((time) => (
-                                    <button
-                                        key={time.id}
-                                        className="px-3 py-1 border rounded hover:bg-gray-100 text-sm"
-                                    >
-                                        <Link to={`/order/detail/seat/${time.id}`}>
+                                {/* Times */}
+                                <div className="flex flex-wrap gap-2">
+                                    {theater.times.map((time) => (
+                                        <Link
+                                            key={time.id}
+                                            to={`/order/detail/seat/${time.id}`}
+                                            className="px-3 py-1 border rounded hover:bg-gray-100 text-sm inline-block"
+                                        >
                                             {time.time}
                                         </Link>
-                                    </button>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
-            ))}
+                        ))}
+                    </div>
+                ))
+            )}
         </div>
     );
 }

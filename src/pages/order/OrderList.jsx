@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useOrder from "../../hooks/useOrder";
 
 function OrderList() {
     const { id } = useParams();
-    const { showScheduleFilm, loading, error } = useOrder();
+    const { searchDate, loading, error } = useOrder();
     const [booking, setBooking] = useState(null);
+    const [date, setDate] = useState("");
 
     // Function untuk ambil ID YouTube dari berbagai format URL
     const getYoutubeId = (url) => {
         if (!url) return null;
 
         if (url.includes("youtu.be")) {
-            return url.split("youtu.be/")[1].split("?")[0];
+            return url.split("youtu.be/")[1]. split("?")[0];
         }
 
         if (url.includes("v=")) {
@@ -24,18 +24,29 @@ function OrderList() {
     };
 
     useEffect(() => {
+        const today = new Date().toISOString().split("T")[0];
+        setDate[today];
+    }, []);
+
+    useEffect(() => {
         const getBooking = async () => {
             try {
-                const data = await showScheduleFilm(id);
+                let data;
+
+                if (date) {
+                    data = await searchDate(id, date);
+                } else {
+                    data = await searchDate(id); // tanpa date
+                }
+
                 setBooking(data);
-                console.log("data dari backend nih", data);
             } catch (err) {
-                console.error("Gagal mengambil data", err);
+                console.error(err);
             }
         };
 
         getBooking();
-    }, [id]);
+    }, [id, date]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p className="text-red-500">{error}</p>;
@@ -64,6 +75,15 @@ function OrderList() {
                     ></iframe>
                 </div>
             )}
+
+            <div className="flex justify-center mb-4">
+                <input
+                    type="date"
+                    value={date} 
+                    onChange={(e) =>setDate(e.target.value)}
+                    className="border px-3 py-2 rounded"
+                />
+            </div>
 
             {/* Schedules */}
             {booking?.schedules?.length === 0 ? (

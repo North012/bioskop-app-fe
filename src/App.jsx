@@ -38,7 +38,7 @@ import CreateSeat from "./pages/seat/CreateSeat";
 import UpdateSeat from "./pages/seat/UpdateSeat";
 import Register from "./pages/Register";
 
-import OrderList from "./pages/order/orderList";
+import OrderList from "./pages/order/OrderList";
 import ShowOrder from "./pages/order/ShowOrder";
 import PaymentDetail from "./pages/order/PaymentDetail";
 

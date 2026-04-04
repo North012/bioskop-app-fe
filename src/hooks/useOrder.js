@@ -91,7 +91,28 @@ function useOrder() {
         }
     };
 
-    return { film, booking, loading, error, showScheduleFilm, nowPlayingFilm, showSeat, chooseSeat, showPayment, createBooking };
+    const searchDate = async (filmId, date) => {
+        setLoading(true);
+        try {
+            let url = `film/search-date/${filmId}`;
+
+            // hanya kirim date kalau ada isinya
+            if (date) {
+                url += `?date=${date}`;
+            }
+
+            const res = await api.get(url);
+            setBooking(res.data);
+            return res.data;
+        } catch (err) {
+            setError(err.response?.data || err.data);
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { film, booking, loading, error, showScheduleFilm, nowPlayingFilm, showSeat, chooseSeat, showPayment, createBooking, searchDate };
 }
 
 export default useOrder;
